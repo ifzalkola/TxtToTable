@@ -1,20 +1,43 @@
 import React, { useState } from "react";
-import logo from "./logo.svg";
+import axios from "axios";
+import CustomTable from "./components/custom-table/custom-table";
 import "./App.css";
 
 const App = () => {
-  const [file, setFile] = useState({ file: null });
-  const handleSubmit = (e) => {
+  const [file, setFile] = useState(null);
+  const [tableData, setTableData] = useState([]);
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(e.target.files[0]);
+    const data = new FormData();
+    data.append("textfile", file);
+    axios
+      .post("/uploads", data)
+      .then((res) => {
+        const data = res.data.data.textfile;
+        const dataArray = data.split("\n");
+        setTableData(dataArray);
+      })
+      .catch((err) => console.log(err));
+  };
+  const handleChange = (e) => {
+    setFile(e.target.files[0]);
   };
   return (
-    <div className="App" onSubmit={handleSubmit}>
-      <form>
-        <label htmlFor="text-file">Select a text file</label>
-        <input type="file" id="text-file"></input>
-        <input type="submit"></input>
-      </form>
+    <div className="App">
+      {tableData.length ? (
+        <CustomTable tableData={tableData}></CustomTable>
+      ) : (
+        <form onSubmit={handleSubmit}>
+          <label className="file-picker" htmlFor="text-file">
+            Select a text file
+          </label>
+          <input type="file" id="text-file" onChange={handleChange}></input>
+          {file ? (
+            <div className="heading">Selected File:{file.name}</div>
+          ) : null}
+          <input type="submit"></input>
+        </form>
+      )}
     </div>
   );
 };

@@ -19,6 +19,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
+const storage = multer.memoryStorage();
 const upload = multer({
   fileFilter: (req, file, cb) => {
     if (!file.mimetype.startsWith("text")) {
@@ -26,7 +27,7 @@ const upload = multer({
     }
     cb(null, true);
   },
-  storage: multer.memoryStorage,
+  storage,
 });
 
 app.post("/uploads", upload.single("textfile"), (req, res) => {

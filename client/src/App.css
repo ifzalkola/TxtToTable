@@ -40,7 +40,7 @@
   padding: 5px 10px;
   display: none;
 }
-label {
+label.file-picker {
   display: block;
   color: white;
   padding: 10px 15px;
@@ -50,4 +50,21 @@ label {
   margin-top: 200px;
   border-radius: 10px;
   cursor: pointer;
+}
+input[type="submit"] {
+  padding: 10px 20px;
+  color: crimson;
+  background-color: teal;
+  margin-top: 20px;
+  cursor: pointer;
+  border: none;
+  font-size: xx-large;
+  border-radius: 10px;
+}
+.heading {
+  margin: auto;
+  margin: 15px 0;
+  font-size: xx-large;
+  font-family: cursive;
+  background-color: antiquewhite;
 }
