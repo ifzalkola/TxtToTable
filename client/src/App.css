@@ -36,3 +36,18 @@
     transform: rotate(360deg);
   }
 }
+#text-file {
+  padding: 5px 10px;
+  display: none;
+}
+label {
+  display: block;
+  color: white;
+  padding: 10px 15px;
+  background-color: crimson;
+  width: 400px;
+  margin: auto;
+  margin-top: 200px;
+  border-radius: 10px;
+  cursor: pointer;
+}
